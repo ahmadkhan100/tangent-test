@@ -1,0 +1,272 @@
+# Development Workflow
+
+This guide outlines the development workflow and best practices for contributing to Tangent Test.
+
+## 🌟 Development Philosophy
+
+Our development approach prioritizes:
+
+> **Data Structure Quality** → Shipping Velocity
+> 
+> *"Shipping velocity is directly proportional to data structure quality, especially in the age where UI can be increasingly treated as an ephemeral asset."*
+
+### Key Principles
+
+1. **Data-First Design**: Structure your data models before building UI
+2. **Type Safety**: Leverage TypeScript for robust interfaces
+3. **Component Reusability**: Build modular, reusable components
+4. **Performance**: Optimize for fast rendering and minimal re-renders
+
+## 🏗️ Project Setup
+
+### Branch Structure
+
+- `master` - Main branch with core setup
+- `react-components` - React components and features
+- `docs` - Documentation and guides (this branch)
+
+### Development Environment
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server with hot reload
+npm run dev
+
+# Run in different port
+npm run dev -- --port 3001
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## 🔧 Adding New Components
+
+### 1. Create Component Structure
+
+```bash
+# Create component files
+touch src/components/MyComponent.tsx
+touch src/components/MyComponent.css
+```
+
+### 2. Component Template
+
+```tsx
+import { useState } from 'react'
+import './MyComponent.css'
+
+interface MyComponentProps {
+  // Define your props here
+  title?: string
+}
+
+const MyComponent = ({ title = 'Default Title' }: MyComponentProps) => {
+  const [state, setState] = useState('')
+
+  return (
+    <div className="my-component">
+      <h2>{title}</h2>
+      {/* Your component JSX */}
+    </div>
+  )
+}
+
+export default MyComponent
+```
+
+### 3. CSS Structure
+
+```css
+.my-component {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Follow the existing glass-morphism pattern */
+```
+
+### 4. Integration
+
+Add your component to the main App:
+
+```tsx
+// In App.tsx
+import MyComponent from './components/MyComponent'
+
+const tabs = [
+  // ... existing tabs
+  { id: 'my-component', label: 'My Component', component: <MyComponent /> }
+]
+```
+
+## 📊 Data Structure Guidelines
+
+### Interface Design
+
+```tsx
+// ✅ Good: Clear, specific interfaces
+interface User {
+  id: number
+  name: string
+  email: string
+  createdAt: Date
+  isActive: boolean  // Clear boolean state
+}
+
+// ❌ Avoid: Vague or unclear structures
+interface Data {
+  stuff: any
+  info: string
+  status: string  // What kind of status?
+}
+```
+
+### State Management Patterns
+
+```tsx
+// ✅ Good: Structured state with clear types
+interface TodoState {
+  todos: Todo[]
+  filter: 'all' | 'active' | 'completed'
+  isLoading: boolean
+  error: string | null
+}
+
+// ✅ Good: Separate concerns
+const [todos, setTodos] = useState<Todo[]>([])
+const [filter, setFilter] = useState<FilterType>('all')
+const [loading, setLoading] = useState(false)
+```
+
+## 🎨 Styling Guidelines
+
+### Design System
+
+We use a glass-morphism design with consistent patterns:
+
+```css
+/* Base card style */
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Interactive elements */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+```
+
+### Color Palette
+
+- Primary: `#4CAF50` (Green)
+- Secondary: `#2196F3` (Blue)
+- Danger: `#f44336` (Red)
+- Warning: `#FF9800` (Orange)
+
+## 🧪 Testing Strategy
+
+### Component Testing
+
+```tsx
+// Example test structure
+import { render, screen } from '@testing-library/react'
+import Counter from './Counter'
+
+test('renders counter component', () => {
+  render(<Counter />)
+  expect(screen.getByText(/counter component/i)).toBeInTheDocument()
+})
+
+test('increments count on button click', () => {
+  render(<Counter />)
+  const incrementButton = screen.getByText(/\+1/i)
+  fireEvent.click(incrementButton)
+  expect(screen.getByText('1')).toBeInTheDocument()
+})
+```
+
+### Running Tests
+
+```bash
+npm run test
+```
+
+## 🚀 Deployment
+
+### Build Process
+
+```bash
+# Create production build
+npm run build
+
+# The build files will be in the `dist` folder
+```
+
+### Performance Optimization
+
+- Use `React.memo()` for expensive components
+- Implement proper key props for lists
+- Optimize images and assets
+- Use code splitting for large components
+
+## 📝 Documentation
+
+### Adding Documentation
+
+1. Create new `.mdx` files in the `docs` folder
+2. Follow the existing structure and tone
+3. Include code examples and practical usage
+4. Update navigation links if needed
+
+### Documentation Standards
+
+- Use clear, concise language
+- Include practical code examples
+- Provide both basic and advanced usage
+- Add visual examples when helpful
+
+## 🔄 Git Workflow
+
+### Commit Messages
+
+Use conventional commit format:
+
+```bash
+feat: add new TodoList component
+fix: resolve counter increment bug
+docs: update component documentation
+style: improve button hover effects
+refactor: simplify user data structure
+```
+
+### Branch Strategy
+
+- `master` - Stable releases
+- `react-components` - Feature development
+- `docs` - Documentation updates
+- `feature/*` - Specific feature branches
+
+Happy developing! 🎉

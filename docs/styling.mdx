@@ -1,0 +1,357 @@
+# Styling Guide
+
+Learn about the design system and styling patterns used in Tangent Test.
+
+## 🎨 Design Philosophy
+
+Our styling approach embraces **Glass Morphism** - a modern design trend that creates depth and hierarchy through:
+
+- Semi-transparent backgrounds
+- Backdrop blur effects
+- Subtle borders and shadows
+- Layered visual elements
+
+## 🌈 Color System
+
+### Primary Colors
+
+```css
+:root {
+  --primary-green: #4CAF50;
+  --primary-blue: #2196F3;
+  --danger-red: #f44336;
+  --warning-orange: #FF9800;
+  --text-white: #ffffff;
+  --text-light: rgba(255, 255, 255, 0.9);
+  --text-muted: rgba(255, 255, 255, 0.7);
+}
+```
+
+### Background Gradients
+
+The main application uses a beautiful gradient background:
+
+```css
+.app {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+```
+
+## 🧩 Component Patterns
+
+### Glass Card Pattern
+
+The foundation of our design system:
+
+```css
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+```
+
+**Usage Example:**
+```tsx
+<div className="counter-card glass-card">
+  {/* Component content */}
+</div>
+```
+
+### Interactive Elements
+
+#### Buttons
+
+```css
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for all buttons */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Button variants */
+.btn-primary { background: #4CAF50; color: white; }
+.btn-secondary { background: #2196F3; color: white; }
+.btn-danger { background: #f44336; color: white; }
+```
+
+#### Form Inputs
+
+```css
+.form-input {
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: inherit;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+```
+
+## 📱 Responsive Design
+
+### Breakpoints
+
+```css
+/* Mobile First Approach */
+.component {
+  /* Mobile styles (default) */
+  padding: 1rem;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .component {
+    padding: 1.5rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .component {
+    padding: 2rem;
+  }
+}
+```
+
+### Layout Patterns
+
+#### Centered Container
+
+```css
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+```
+
+#### Flexible Grid
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+```
+
+## ✨ Animation & Transitions
+
+### Smooth Transitions
+
+All interactive elements use consistent timing:
+
+```css
+.interactive-element {
+  transition: all 0.3s ease;
+}
+
+/* For more complex animations */
+.complex-animation {
+  transition: 
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease,
+    background-color 0.3s ease;
+}
+```
+
+### Hover Effects
+
+#### Lift Effect
+
+```css
+.lift-on-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+```
+
+#### Scale Effect
+
+```css
+.scale-on-hover:hover {
+  transform: scale(1.05);
+}
+```
+
+#### Glow Effect
+
+```css
+.glow-on-hover:hover {
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.1);
+}
+```
+
+## 🎯 Specific Component Styles
+
+### Counter Component
+
+```css
+.count-value {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+```
+
+### Todo List Priority Tags
+
+```css
+.priority-low {
+  background: #4CAF50;
+  color: white;
+}
+
+.priority-medium {
+  background: #FF9800;
+  color: white;
+}
+
+.priority-high {
+  background: #f44336;
+  color: white;
+}
+```
+
+### User Card Avatar
+
+```css
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+```
+
+## 🔧 CSS Architecture
+
+### File Organization
+
+```
+src/
+├── index.css           # Global styles & resets
+├── App.css            # Main app layout & navigation
+└── components/
+    ├── Counter.css    # Counter-specific styles
+    ├── TodoList.css   # Todo list styles
+    └── UserCard.css   # User card styles
+```
+
+### Naming Conventions
+
+We follow **BEM-inspired** naming with component prefixes:
+
+```css
+/* Component block */
+.counter-container { }
+
+/* Component elements */
+.counter-card { }
+.counter-display { }
+.counter-buttons { }
+
+/* Component modifiers */
+.counter-card--loading { }
+.btn--primary { }
+.btn--disabled { }
+```
+
+### CSS Custom Properties
+
+Use CSS variables for consistent theming:
+
+```css
+.component {
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+}
+```
+
+## 🎨 Customization Tips
+
+### Changing the Color Scheme
+
+1. **Update the main gradient** in `App.css`:
+```css
+.app {
+  background: linear-gradient(135deg, #your-color-1 0%, #your-color-2 100%);
+}
+```
+
+2. **Adjust glass opacity** for different effects:
+```css
+.glass-card {
+  background: rgba(255, 255, 255, 0.15); /* More opaque */
+  /* or */
+  background: rgba(255, 255, 255, 0.05);  /* More transparent */
+}
+```
+
+### Creating New Component Styles
+
+1. Create a new CSS file for your component
+2. Follow the established naming patterns
+3. Use the glass card base styles
+4. Add component-specific customizations
+5. Include hover and focus states
+
+### Dark/Light Mode Support
+
+```css
+/* CSS variables for theme switching */
+:root {
+  --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+}
+
+[data-theme="light"] {
+  --bg-primary: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --glass-bg: rgba(0, 0, 0, 0.1);
+  --text-primary: #333333;
+}
+```
+
+Happy styling! ✨
