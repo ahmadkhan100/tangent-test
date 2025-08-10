@@ -1,0 +1,492 @@
+# API Reference
+
+Complete reference for all components, hooks, and utilities in Tangent Test.
+
+## 📦 Components
+
+### Counter
+
+Interactive counter component with customizable step size.
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| None | - | - | Counter manages its own state |
+
+#### State
+
+```tsx
+interface CounterState {
+  count: number      // Current counter value
+  step: number       // Increment/decrement step size
+}
+```
+
+#### Methods
+
+| Method | Parameters | Description |
+|--------|------------|-------------|
+| `increment()` | None | Increases count by step value |
+| `decrement()` | None | Decreases count by step value |
+| `reset()` | None | Resets count to 0 |
+
+#### Example
+
+```tsx
+import Counter from './components/Counter'
+
+function App() {
+  return (
+    <div>
+      <Counter />
+    </div>
+  )
+}
+```
+
+---
+
+### TodoList
+
+Comprehensive todo management system with filtering and priorities.
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| None | - | - | TodoList manages its own state |
+
+#### Interfaces
+
+```tsx
+interface Todo {
+  id: number
+  text: string
+  completed: boolean
+  priority: 'low' | 'medium' | 'high'
+}
+
+type FilterType = 'all' | 'active' | 'completed'
+```
+
+#### State
+
+```tsx
+interface TodoListState {
+  todos: Todo[]
+  newTodo: string
+  priority: 'low' | 'medium' | 'high'
+  filter: FilterType
+}
+```
+
+#### Methods
+
+| Method | Parameters | Description |
+|--------|------------|-------------|
+| `addTodo()` | None | Adds new todo from input |
+| `toggleTodo(id)` | `id: number` | Toggles completion status |
+| `deleteTodo(id)` | `id: number` | Removes todo from list |
+
+#### Example
+
+```tsx
+import TodoList from './components/TodoList'
+
+function App() {
+  return (
+    <div>
+      <TodoList />
+    </div>
+  )
+}
+```
+
+---
+
+### UserCard
+
+User profile display with API integration and navigation.
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| None | - | - | UserCard manages its own state |
+
+#### Interfaces
+
+```tsx
+interface User {
+  id: number
+  name: string
+  username: string
+  email: string
+  phone: string
+  website: string
+  company: {
+    name: string
+    catchPhrase: string
+  }
+  address: {
+    street: string
+    city: string
+    zipcode: string
+  }
+}
+```
+
+#### State
+
+```tsx
+interface UserCardState {
+  users: User[]
+  currentUserIndex: number
+  loading: boolean
+  error: string | null
+}
+```
+
+#### Methods
+
+| Method | Parameters | Description |
+|--------|------------|-------------|
+| `fetchUsers()` | None | Fetches users from API |
+| `nextUser()` | None | Navigate to next user |
+| `prevUser()` | None | Navigate to previous user |
+| `randomUser()` | None | Navigate to random user |
+
+#### API Endpoint
+
+```
+GET https://jsonplaceholder.typicode.com/users
+```
+
+#### Example
+
+```tsx
+import UserCard from './components/UserCard'
+
+function App() {
+  return (
+    <div>
+      <UserCard />
+    </div>
+  )
+}
+```
+
+---
+
+## 🎣 Custom Hooks
+
+### useLocalStorage
+
+Store and retrieve data from localStorage with React state synchronization.
+
+```tsx
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    try {
+      const item = window.localStorage.getItem(key)
+      return item ? JSON.parse(item) : initialValue
+    } catch (error) {
+      return initialValue
+    }
+  })
+
+  const setValue = (value: T | ((val: T) => T)) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value
+      setStoredValue(valueToStore)
+      window.localStorage.setItem(key, JSON.stringify(valueToStore))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return [storedValue, setValue] as const
+}
+```
+
+#### Usage
+
+```tsx
+const [count, setCount] = useLocalStorage('count', 0)
+const [todos, setTodos] = useLocalStorage<Todo[]>('todos', [])
+```
+
+---
+
+### useAsync
+
+Handle async operations with loading and error states.
+
+```tsx
+function useAsync<T>(asyncFunction: () => Promise<T>, dependencies: any[] = []) {
+  const [data, setData] = useState<T | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    
+    setLoading(true)
+    setError(null)
+    
+    asyncFunction()
+      .then(result => {
+        if (!cancelled) {
+          setData(result)
+          setLoading(false)
+        }
+      })
+      .catch(err => {
+        if (!cancelled) {
+          setError(err.message)
+          setLoading(false)
+        }
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, dependencies)
+
+  return { data, loading, error }
+}
+```
+
+#### Usage
+
+```tsx
+const { data: users, loading, error } = useAsync(fetchUsers, [])
+```
+
+---
+
+## 🛠️ Utilities
+
+### formatDate
+
+Format dates for display in components.
+
+```tsx
+function formatDate(date: Date | string): string {
+  const d = new Date(date)
+  return d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
+}
+```
+
+#### Usage
+
+```tsx
+const formattedDate = formatDate(new Date())
+// Output: "Jan 15, 2024"
+```
+
+---
+
+### classNames
+
+Conditionally join class names together.
+
+```tsx
+function classNames(...classes: (string | undefined | null | false)[]): string {
+  return classes.filter(Boolean).join(' ')
+}
+```
+
+#### Usage
+
+```tsx
+const buttonClass = classNames(
+  'btn',
+  isPrimary && 'btn-primary',
+  isDisabled && 'btn-disabled'
+)
+```
+
+---
+
+### debounce
+
+Debounce function calls to improve performance.
+
+```tsx
+function debounce<T extends (...args: any[]) => void>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout
+  
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => func(...args), wait)
+  }
+}
+```
+
+#### Usage
+
+```tsx
+const debouncedSearch = debounce((query: string) => {
+  // Perform search
+}, 300)
+```
+
+---
+
+## 🎨 CSS Classes
+
+### Layout Classes
+
+```css
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+```
+
+### Typography Classes
+
+```css
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-center {
+  text-align: center;
+}
+```
+
+### Spacing Classes
+
+```css
+.p-4 {
+  padding: 1rem;
+}
+
+.m-4 {
+  margin: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+```
+
+---
+
+## 📱 Responsive Breakpoints
+
+```css
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { }
+```
+
+---
+
+## 🔧 Configuration
+
+### Vite Config
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+    open: true
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true
+  }
+})
+```
+
+### TypeScript Config
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
+
+This reference covers all the main APIs and utilities available in Tangent Test. For more detailed examples, check out the component implementations in the `/src` directory.
