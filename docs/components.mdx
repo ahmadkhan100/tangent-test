@@ -4,14 +4,18 @@ This guide provides detailed information about all the React components availabl
 
 ## 🔢 Counter Component
 
-The Counter component demonstrates state management with hooks and provides an interactive counting interface.
+The Counter component demonstrates state management with hooks and provides an interactive counting interface. This is why for some
 
 ### Features
 
-- **Increment/Decrement**: Adjust the counter value
-- **Custom Step Size**: Configure how much to increment/decrement
-- **Reset Functionality**: Return counter to zero
-- **Real-time Info**: Display counter properties (even/odd, positive/negative)
+*   **Increment/Decrement**: Adjust the counter value
+    
+*   **Custom Step Size**: Configure how much to increment/decrement
+    
+*   **Reset Functionality**: Return counter to zero
+    
+*   **Real-time Info**: Display counter properties (even/odd, positive/negative)
+    
 
 ### Usage
 
@@ -21,6 +25,7 @@ import Counter from './components/Counter'
 function App() {
   return <Counter />
 }
+
 ```
 
 ### Props
@@ -32,9 +37,10 @@ The Counter component doesn't accept any props - it manages its own internal sta
 ```tsx
 const [count, setCount] = useState(0)
 const [step, setStep] = useState(1)
+
 ```
 
----
+* * *
 
 ## 📝 TodoList Component
 
@@ -42,12 +48,18 @@ A comprehensive todo management system with filtering and priority features.
 
 ### Features
 
-- **Add Todos**: Create new tasks with priority levels
-- **Toggle Completion**: Mark tasks as complete/incomplete
-- **Delete Todos**: Remove unwanted tasks
-- **Filter System**: View all, active, or completed todos
-- **Priority Levels**: Low, Medium, High priority classification
-- **Statistics**: Real-time count of total, active, and completed tasks
+*   **Add Todos**: Create new tasks with priority levels
+    
+*   **Toggle Completion**: Mark tasks as complete/incomplete
+    
+*   **Delete Todos**: Remove unwanted tasks
+    
+*   **Filter System**: View all, active, or completed todos
+    
+*   **Priority Levels**: Low, Medium, High priority classification
+    
+*   **Statistics**: Real-time count of total, active, and completed tasks
+    
 
 ### Usage
 
@@ -57,6 +69,7 @@ import TodoList from './components/TodoList'
 function App() {
   return <TodoList />
 }
+
 ```
 
 ### Data Structure
@@ -68,15 +81,19 @@ interface Todo {
   completed: boolean
   priority: 'low' | 'medium' | 'high'
 }
+
 ```
 
 ### Key Functions
 
-- `addTodo()` - Creates new todo items
-- `toggleTodo(id)` - Toggles completion status
-- `deleteTodo(id)` - Removes todo from list
+*   `addTodo()` - Creates new todo items
+    
+*   `toggleTodo(id)` - Toggles completion status
+    
+*   `deleteTodo(id)` - Removes todo from list
+    
 
----
+* * *
 
 ## 👤 UserCard Component
 
@@ -84,11 +101,16 @@ Displays user profile information fetched from an external API with navigation c
 
 ### Features
 
-- **API Integration**: Fetches data from JSONPlaceholder API
-- **User Navigation**: Previous/Next/Random user selection
-- **Loading States**: Shows loading spinner during data fetch
-- **Error Handling**: Displays error messages with retry functionality
-- **Responsive Design**: Adapts to different screen sizes
+*   **API Integration**: Fetches data from JSONPlaceholder API
+    
+*   **User Navigation**: Previous/Next/Random user selection
+    
+*   **Loading States**: Shows loading spinner during data fetch
+    
+*   **Error Handling**: Displays error messages with retry functionality
+    
+*   **Responsive Design**: Adapts to different screen sizes
+    
 
 ### Usage
 
@@ -98,6 +120,7 @@ import UserCard from './components/UserCard'
 function App() {
   return <UserCard />
 }
+
 ```
 
 ### API Integration
@@ -108,6 +131,7 @@ const fetchUsers = async () => {
   const userData = await response.json()
   setUsers(userData)
 }
+
 ```
 
 ### User Data Structure
@@ -130,6 +154,7 @@ interface User {
     zipcode: string
   }
 }
+
 ```
 
 ## Component Architecture
@@ -137,27 +162,44 @@ interface User {
 All components follow these patterns:
 
 ### 🎨 Styling
-- CSS Modules for component-specific styles
-- Glass-morphism design with backdrop blur effects
-- Responsive design principles
-- Consistent color scheme and spacing
+
+*   CSS Modules for component-specific styles
+    
+*   Glass-morphism design with backdrop blur effects
+    
+*   Responsive design principles
+    
+*   Consistent color scheme and spacing
+    
 
 ### 🔄 State Management
-- React hooks for local state
-- TypeScript interfaces for type safety
-- Proper error boundaries and loading states
+
+*   React hooks for local state
+    
+*   TypeScript interfaces for type safety
+    
+*   Proper error boundaries and loading states
+    
 
 ### 🎯 Best Practices
-- Semantic HTML structure
-- Accessible form controls
-- Keyboard navigation support
-- Clean separation of concerns
+
+*   Semantic HTML structure
+    
+*   Accessible form controls
+    
+*   Keyboard navigation support
+    
+*   Clean separation of concerns
+    
 
 ## Customization
 
 Each component can be easily customized by:
 
-1. **Modifying CSS variables** in the respective `.css` files
-2. **Extending interfaces** for additional data properties
-3. **Adding new features** following the established patterns
-4. **Integrating with external APIs** as demonstrated in UserCard
+1.  **Modifying CSS variables** in the respective `.css` files
+    
+2.  **Extending interfaces** for additional data properties
+    
+3.  **Adding new features** following the established patterns
+    
+4.  **Integrating with external APIs** as demonstrated in UserCard
