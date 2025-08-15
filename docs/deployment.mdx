@@ -1,0 +1,218 @@
+# Deployment
+
+Deploy your React application to production with various hosting platforms and strategies.
+
+## Build Process
+
+Before deployment, optimize your application for production:
+
+```bash
+npm run build
+```
+
+This creates an optimized build in the `dist` directory with:
+- Minified JavaScript and CSS
+- Tree-shaking for smaller bundles
+- Optimized assets
+- Source maps for debugging
+
+## Deployment Platforms
+
+### Vercel
+
+The easiest deployment option with automatic CI/CD:
+
+```bash
+npm i -g vercel
+vercel
+```
+
+Features:
+- Automatic HTTPS
+- Global CDN
+- Preview deployments for pull requests
+- Analytics and Web Vitals monitoring
+
+### Netlify
+
+Deploy with drag-and-drop or Git integration:
+
+```toml
+# netlify.toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+```
+
+### AWS S3 + CloudFront
+
+For enterprise-scale deployments:
+
+```bash
+# Build the app
+npm run build
+
+# Upload to S3
+aws s3 sync dist/ s3://your-bucket-name --delete
+
+# Invalidate CloudFront cache
+aws cloudfront create-invalidation --distribution-id YOUR_DIST_ID --paths "/*"
+```
+
+### Docker
+
+Containerize your application:
+
+```dockerfile
+# Dockerfile
+FROM node:18-alpine as builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+## Environment Variables
+
+Manage different configurations for different environments:
+
+```typescript
+// vite.config.ts
+export default {
+  define: {
+    'process.env.API_URL': JSON.stringify(process.env.VITE_API_URL),
+    'process.env.ENV': JSON.stringify(process.env.NODE_ENV)
+  }
+}
+```
+
+Create environment files:
+- `.env.development`
+- `.env.staging`
+- `.env.production`
+
+## CI/CD Pipeline
+
+### GitHub Actions
+
+```yaml
+name: Deploy
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test
+      - name: Deploy to Production
+        run: |
+          # Your deployment script here
+```
+
+## Performance Optimization
+
+### Code Splitting
+
+```typescript
+// Lazy load components
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+
+function App() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Dashboard />
+    </Suspense>
+  )
+}
+```
+
+### Asset Optimization
+
+```typescript
+// vite.config.ts
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          utils: ['lodash', 'date-fns']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  }
+}
+```
+
+## Monitoring
+
+### Error Tracking with Sentry
+
+```typescript
+import * as Sentry from "@sentry/react"
+
+Sentry.init({
+  dsn: "YOUR_SENTRY_DSN",
+  environment: process.env.NODE_ENV,
+  integrations: [
+    new Sentry.BrowserTracing(),
+    new Sentry.Replay()
+  ],
+  tracesSampleRate: 0.1,
+  replaysSessionSampleRate: 0.1
+})
+```
+
+### Analytics
+
+```typescript
+// Google Analytics
+import ReactGA from 'react-ga4'
+
+ReactGA.initialize('YOUR_GA_ID')
+ReactGA.send('pageview')
+```
+
+## Security Best Practices
+
+1. **Use HTTPS**: Always serve your app over HTTPS
+2. **Content Security Policy**: Add CSP headers
+3. **Environment Variables**: Never commit sensitive data
+4. **Dependencies**: Keep dependencies updated
+5. **CORS**: Configure proper CORS policies
+
+## Rollback Strategy
+
+Maintain previous deployments for quick rollbacks:
+
+```bash
+# Tag releases
+git tag -a v1.2.0 -m "Release version 1.2.0"
+git push origin v1.2.0
+
+# Rollback if needed
+git checkout v1.1.0
+npm run build
+npm run deploy
+```
