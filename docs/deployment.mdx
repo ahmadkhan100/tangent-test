@@ -4,17 +4,21 @@ Deploy your React application to production with various hosting platforms and s
 
 ## Build Process
 
-Before deployment, optimize your application for production:
+Before deployment, optimize your application for production enc:
 
 ```bash
 npm run build
 ```
 
 This creates an optimized build in the `dist` directory with:
-- Minified JavaScript and CSS
-- Tree-shaking for smaller bundles
-- Optimized assets
-- Source maps for debugging
+
+* Minified JavaScript and CSS
+
+* Tree-shaking for smaller bundles
+
+* Optimized assets
+
+* Source maps for debugging
 
 ## Deployment Platforms
 
@@ -28,10 +32,14 @@ vercel
 ```
 
 Features:
-- Automatic HTTPS
-- Global CDN
-- Preview deployments for pull requests
-- Analytics and Web Vitals monitoring
+
+* Automatic HTTPS
+
+* Global CDN
+
+* Preview deployments for pull requests
+
+* Analytics and Web Vitals monitoring
 
 ### Netlify
 
@@ -99,9 +107,12 @@ export default {
 ```
 
 Create environment files:
-- `.env.development`
-- `.env.staging`
-- `.env.production`
+
+* `.env.development`
+
+* `.env.staging`
+
+* `.env.production`
 
 ## CI/CD Pipeline
 
@@ -197,9 +208,13 @@ ReactGA.send('pageview')
 ## Security Best Practices
 
 1. **Use HTTPS**: Always serve your app over HTTPS
+
 2. **Content Security Policy**: Add CSP headers
+
 3. **Environment Variables**: Never commit sensitive data
+
 4. **Dependencies**: Keep dependencies updated
+
 5. **CORS**: Configure proper CORS policies
 
 ## Rollback Strategy
