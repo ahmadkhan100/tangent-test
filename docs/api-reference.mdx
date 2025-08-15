@@ -6,13 +6,11 @@ Complete reference for all components, hooks, and utilities in Tangent Test.
 
 ### Counter
 
-Interactive counter component with customizable step size.
+Interactive counter component with customizable step size. Fix the PR
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| None | - | - | Counter manages its own state |
+<table class="content-table" style="min-width: 100px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>Prop</p></th><th colspan="1" rowspan="1"><p>Type</p></th><th colspan="1" rowspan="1"><p>Default</p></th><th colspan="1" rowspan="1"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>-</p></td><td colspan="1" rowspan="1"><p>-</p></td><td colspan="1" rowspan="1"><p>Counter manages its own state</p></td></tr></tbody></table>
 
 #### State
 
@@ -21,15 +19,12 @@ interface CounterState {
   count: number      // Current counter value
   step: number       // Increment/decrement step size
 }
+
 ```
 
 #### Methods
 
-| Method | Parameters | Description |
-|--------|------------|-------------|
-| `increment()` | None | Increases count by step value |
-| `decrement()` | None | Decreases count by step value |
-| `reset()` | None | Resets count to 0 |
+<table class="content-table" style="min-width: 75px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>Method</p></th><th colspan="1" rowspan="1"><p>Parameters</p></th><th colspan="1" rowspan="1"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1"><p><code>increment()</code></p></td><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>Increases count by step value</p></td></tr><tr><td colspan="1" rowspan="1"><p><code>decrement()</code></p></td><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>Decreases count by step value</p></td></tr><tr><td colspan="1" rowspan="1"><p><code>reset()</code></p></td><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>Resets count to 0</p></td></tr></tbody></table>
 
 #### Example
 
@@ -43,9 +38,10 @@ function App() {
     </div>
   )
 }
+
 ```
 
----
+* * *
 
 ### TodoList
 
@@ -53,9 +49,7 @@ Comprehensive todo management system with filtering and priorities.
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| None | - | - | TodoList manages its own state |
+<table class="content-table" style="min-width: 100px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>Prop</p></th><th colspan="1" rowspan="1"><p>Type</p></th><th colspan="1" rowspan="1"><p>Default</p></th><th colspan="1" rowspan="1"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>-</p></td><td colspan="1" rowspan="1"><p>-</p></td><td colspan="1" rowspan="1"><p>TodoList manages its own state</p></td></tr></tbody></table>
 
 #### Interfaces
 
@@ -68,6 +62,7 @@ interface Todo {
 }
 
 type FilterType = 'all' | 'active' | 'completed'
+
 ```
 
 #### State
@@ -79,15 +74,12 @@ interface TodoListState {
   priority: 'low' | 'medium' | 'high'
   filter: FilterType
 }
+
 ```
 
 #### Methods
 
-| Method | Parameters | Description |
-|--------|------------|-------------|
-| `addTodo()` | None | Adds new todo from input |
-| `toggleTodo(id)` | `id: number` | Toggles completion status |
-| `deleteTodo(id)` | `id: number` | Removes todo from list |
+<table class="content-table" style="min-width: 75px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>Method</p></th><th colspan="1" rowspan="1"><p>Parameters</p></th><th colspan="1" rowspan="1"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1"><p><code>addTodo()</code></p></td><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>Adds new todo from input</p></td></tr><tr><td colspan="1" rowspan="1"><p><code>toggleTodo(id)</code></p></td><td colspan="1" rowspan="1"><p><code>id: number</code></p></td><td colspan="1" rowspan="1"><p>Toggles completion status</p></td></tr><tr><td colspan="1" rowspan="1"><p><code>deleteTodo(id)</code></p></td><td colspan="1" rowspan="1"><p><code>id: number</code></p></td><td colspan="1" rowspan="1"><p>Removes todo from list</p></td></tr></tbody></table>
 
 #### Example
 
@@ -101,9 +93,10 @@ function App() {
     </div>
   )
 }
+
 ```
 
----
+* * *
 
 ### UserCard
 
@@ -111,9 +104,7 @@ User profile display with API integration and navigation.
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| None | - | - | UserCard manages its own state |
+<table class="content-table" style="min-width: 100px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>Prop</p></th><th colspan="1" rowspan="1"><p>Type</p></th><th colspan="1" rowspan="1"><p>Default</p></th><th colspan="1" rowspan="1"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>-</p></td><td colspan="1" rowspan="1"><p>-</p></td><td colspan="1" rowspan="1"><p>UserCard manages its own state</p></td></tr></tbody></table>
 
 #### Interfaces
 
@@ -135,6 +126,7 @@ interface User {
     zipcode: string
   }
 }
+
 ```
 
 #### State
@@ -146,21 +138,18 @@ interface UserCardState {
   loading: boolean
   error: string | null
 }
+
 ```
 
 #### Methods
 
-| Method | Parameters | Description |
-|--------|------------|-------------|
-| `fetchUsers()` | None | Fetches users from API |
-| `nextUser()` | None | Navigate to next user |
-| `prevUser()` | None | Navigate to previous user |
-| `randomUser()` | None | Navigate to random user |
+<table class="content-table" style="min-width: 75px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><th colspan="1" rowspan="1"><p>Method</p></th><th colspan="1" rowspan="1"><p>Parameters</p></th><th colspan="1" rowspan="1"><p>Description</p></th></tr><tr><td colspan="1" rowspan="1"><p><code>fetchUsers()</code></p></td><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>Fetches users from API</p></td></tr><tr><td colspan="1" rowspan="1"><p><code>nextUser()</code></p></td><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>Navigate to next user</p></td></tr><tr><td colspan="1" rowspan="1"><p><code>prevUser()</code></p></td><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>Navigate to previous user</p></td></tr><tr><td colspan="1" rowspan="1"><p><code>randomUser()</code></p></td><td colspan="1" rowspan="1"><p>None</p></td><td colspan="1" rowspan="1"><p>Navigate to random user</p></td></tr></tbody></table>
 
 #### API Endpoint
 
-```
+```plaintext
 GET https://jsonplaceholder.typicode.com/users
+
 ```
 
 #### Example
@@ -175,9 +164,10 @@ function App() {
     </div>
   )
 }
+
 ```
 
----
+* * *
 
 ## 🎣 Custom Hooks
 
@@ -208,6 +198,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
   return [storedValue, setValue] as const
 }
+
 ```
 
 #### Usage
@@ -215,9 +206,10 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 ```tsx
 const [count, setCount] = useLocalStorage('count', 0)
 const [todos, setTodos] = useLocalStorage<Todo[]>('todos', [])
+
 ```
 
----
+* * *
 
 ### useAsync
 
@@ -256,15 +248,17 @@ function useAsync<T>(asyncFunction: () => Promise<T>, dependencies: any[] = []) 
 
   return { data, loading, error }
 }
+
 ```
 
 #### Usage
 
 ```tsx
 const { data: users, loading, error } = useAsync(fetchUsers, [])
+
 ```
 
----
+* * *
 
 ## 🛠️ Utilities
 
@@ -281,6 +275,7 @@ function formatDate(date: Date | string): string {
     day: 'numeric'
   })
 }
+
 ```
 
 #### Usage
@@ -288,9 +283,10 @@ function formatDate(date: Date | string): string {
 ```tsx
 const formattedDate = formatDate(new Date())
 // Output: "Jan 15, 2024"
+
 ```
 
----
+* * *
 
 ### classNames
 
@@ -300,6 +296,7 @@ Conditionally join class names together.
 function classNames(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(' ')
 }
+
 ```
 
 #### Usage
@@ -310,9 +307,10 @@ const buttonClass = classNames(
   isPrimary && 'btn-primary',
   isDisabled && 'btn-disabled'
 )
+
 ```
 
----
+* * *
 
 ### debounce
 
@@ -330,6 +328,7 @@ function debounce<T extends (...args: any[]) => void>(
     timeout = setTimeout(() => func(...args), wait)
   }
 }
+
 ```
 
 #### Usage
@@ -338,9 +337,10 @@ function debounce<T extends (...args: any[]) => void>(
 const debouncedSearch = debounce((query: string) => {
   // Perform search
 }, 300)
+
 ```
 
----
+* * *
 
 ## 🎨 CSS Classes
 
@@ -374,6 +374,7 @@ const debouncedSearch = debounce((query: string) => {
 .gap-4 {
   gap: 1rem;
 }
+
 ```
 
 ### Typography Classes
@@ -398,6 +399,7 @@ const debouncedSearch = debounce((query: string) => {
 .text-center {
   text-align: center;
 }
+
 ```
 
 ### Spacing Classes
@@ -418,9 +420,10 @@ const debouncedSearch = debounce((query: string) => {
 .mb-4 {
   margin-bottom: 1rem;
 }
+
 ```
 
----
+* * *
 
 ## 📱 Responsive Breakpoints
 
@@ -436,9 +439,10 @@ const debouncedSearch = debounce((query: string) => {
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { }
+
 ```
 
----
+* * *
 
 ## 🔧 Configuration
 
@@ -460,6 +464,7 @@ export default defineConfig({
     sourcemap: true
   }
 })
+
 ```
 
 ### TypeScript Config
@@ -487,6 +492,7 @@ export default defineConfig({
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+
 ```
 
 This reference covers all the main APIs and utilities available in Tangent Test. For more detailed examples, check out the component implementations in the `/src` directory.
