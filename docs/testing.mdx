@@ -2,17 +2,20 @@
 
 Testing is crucial for maintaining code quality and preventing regressions in your React application.
 
-## Testing Strategy
+## Testing Strategy h
 
 Our application uses a comprehensive testing approach:
 
-- **Unit Tests**: Test individual components and functions in isolation
-- **Integration Tests**: Test how components work together
-- **End-to-End Tests**: Test complete user workflows
+* **Unit Tests**: Test individual components and functions in isolation
+
+* **Integration Tests**: Test how components work together
+
+* **End-to-End Tests**: Test complete user workflows
 
 ## Testing Libraries
 
 ### Vitest
+
 Fast unit test framework with excellent TypeScript support and HMR capabilities.
 
 ```bash
@@ -20,6 +23,7 @@ npm install -D vitest @testing-library/react @testing-library/jest-dom
 ```
 
 ### React Testing Library
+
 Focuses on testing components the way users interact with them.
 
 ```tsx
@@ -111,9 +115,13 @@ Generate coverage reports to identify untested code:
 ## Best Practices
 
 1. **Test Behavior, Not Implementation**: Focus on what the component does, not how
+
 2. **Use Descriptive Test Names**: Make it clear what's being tested
+
 3. **Keep Tests Independent**: Each test should run in isolation
+
 4. **Test Edge Cases**: Don't just test the happy path
+
 5. **Use Data-testid Sparingly**: Prefer accessible queries like getByRole or getByText
 
 ## Continuous Integration
