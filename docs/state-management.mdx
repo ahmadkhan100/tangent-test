@@ -6,7 +6,7 @@ Effective state management is crucial for building scalable React applications. 
 
 The simplest form of state management using React's built-in hooks.
 
-### useState Hook
+### useState Hooks
 
 ```tsx
 import { useState } from 'react'
@@ -39,6 +39,8 @@ function reducer(state, action) {
       return { ...state, count: state.count + state.step }
     case 'decrement':
       return { ...state, count: state.count - state.step }
+    case 'setStep': 
+      return { ...state, step: action.payload }
     case 'setStep':
       return { ...state, step: action.payload }
     default:
@@ -151,7 +153,7 @@ const useTodoStore = create<TodoStore>()(
 
 ### Redux Toolkit
 
-For complex applications requiring predictable state updates:
+For complex applications requiring predictable state updates hence:
 
 ```tsx
 import { createSlice, configureStore } from '@reduxjs/toolkit'
@@ -219,7 +221,7 @@ function UserProfile({ userId }) {
 
 ## State Management Patterns
 
-### Lifting State Up
+### Lifting State Up:
 
 ```tsx
 function Parent() {
@@ -303,9 +305,13 @@ function App() {
 ## Best Practices
 
 1. **Start Simple**: Use local state until you need to share it
+
 2. **Normalize Data**: Store data in a flat structure with IDs as keys
+
 3. **Single Source of Truth**: Each piece of state should have one authoritative source
+
 4. **Immutable Updates**: Never mutate state directly
+
 5. **Separate Concerns**: Keep UI state separate from server state
 
 ## Debugging State
