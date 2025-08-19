@@ -1,0 +1,106 @@
+{
+  "$schema": "https://tangent.dev/schema/v1",
+  "name": "Tangent Test",
+  "description": "A playground for experimenting with React components and modern web development patterns",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmadkhan100/tangent-test"
+  },
+  "documentation": {
+    "format": "mdx",
+    "directory": "docs",
+    "structure": {
+      "guides": [
+        {
+          "title": "Getting Started",
+          "path": "getting-started.mdx",
+          "description": "Quick setup and introduction to the project",
+          "order": 1
+        },
+        {
+          "title": "Components",
+          "path": "components.mdx",
+          "description": "Detailed guide to all React components",
+          "order": 2
+        },
+        {
+          "title": "Development",
+          "path": "development.mdx",
+          "description": "Best practices and development guidelines",
+          "order": 3
+        },
+        {
+          "title": "Styling",
+          "path": "styling.mdx",
+          "description": "Design system and CSS patterns",
+          "order": 4
+        }
+      ],
+      "reference": [
+        {
+          "title": "API Reference",
+          "path": "api-reference.mdx",
+          "description": "Complete API documentation for components and utilities",
+          "order": 1
+        }
+      ]
+    }
+  },
+  "project": {
+    "type": "react",
+    "framework": "vite",
+    "language": "typescript",
+    "styling": "css",
+    "components": [
+      {
+        "name": "Counter",
+        "path": "src/components/Counter.tsx",
+        "description": "Interactive counter component with increment/decrement functionality",
+        "category": "interactive"
+      },
+      {
+        "name": "TodoList",
+        "path": "src/components/TodoList.tsx",
+        "description": "Todo management component with add, toggle, and delete features",
+        "category": "data-management"
+      },
+      {
+        "name": "UserCard",
+        "path": "src/components/UserCard.tsx",
+        "description": "User profile display component with avatar and info",
+        "category": "display"
+      }
+    ],
+    "features": [
+      "React 18 with hooks",
+      "TypeScript for type safety",
+      "Vite for fast development",
+      "Modern CSS with glass-morphism effects",
+      "Component-based architecture",
+      "Interactive UI components"
+    ],
+    "scripts": {
+      "dev": "Start development server",
+      "build": "Build for production", 
+      "preview": "Preview production build",
+      "test": "Run test suite"
+    }
+  },
+  "contributing": {
+    "guidelines": "docs/development.mdx",
+    "codeStyle": "TypeScript with React functional components",
+    "testing": "Vitest for unit testing",
+    "workflow": "Feature branch workflow with PR reviews"
+  },
+  "tags": [
+    "react",
+    "typescript",
+    "vite",
+    "components",
+    "playground",
+    "modern-css",
+    "glass-morphism",
+    "hooks"
+  ]
+}
